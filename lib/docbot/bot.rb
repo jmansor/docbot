@@ -1,8 +1,8 @@
 require 'slack-ruby-client'
-require_relative 'ruby_doc'
-require_relative 'matchers/direct_message'
-require_relative 'matchers/bot_mention_direct_message'
-require_relative 'matchers/bot_mention_advanced_message'
+require 'docbot/ruby_doc'
+require 'docbot/matchers/direct_message'
+require 'docbot/matchers/bot_mention_direct_message'
+require 'docbot/matchers/bot_mention_advanced_message'
 
 module Docbot
   class Bot

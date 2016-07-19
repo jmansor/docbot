@@ -40,23 +40,32 @@ RSpec.describe Docbot::Bot do
     end
 
     context 'when there has been an invalid request for ruby documentation' do
-      it 'should indicate if the message was intended to the bot or not' do
+      it 'should return true' do
         symbol_doc = double
         allow(symbol_doc).to receive(:text).and_return('not found')
         allow(symbol_doc).to receive(:success).and_return(false)
 
         must_respond = bot.must_respond?(symbol_doc)
 
-        expect(must_respond).to be false
+        expect(must_respond).to be true
       end
     end
 
     context 'when the message contained just one word and it didn\'t match any ruby documentation entry' do
-      it 'should return false' do
+      it 'should return true' do
         symbol_doc = double
         allow(symbol_doc).to receive(:text).and_return('not found')
         allow(symbol_doc).to receive(:success).and_return(false)
 
+        must_respond = bot.must_respond?(symbol_doc)
+
+        expect(must_respond).to be true
+      end
+    end
+
+    context 'when the message didn\'t match any of the message formats accepted by the bot' do
+      it 'should return false' do
+        symbol_doc = nil
         must_respond = bot.must_respond?(symbol_doc)
 
         expect(must_respond).to be false
@@ -86,7 +95,7 @@ RSpec.describe Docbot::Bot do
 
       bot_response = bot.respond_error(symbol_doc)
 
-      expect(bot_response).to eq('I\'m sorry, I could not find any documentation for Array#first')
+      expect(bot_response).to eq('I\'m sorry, I could not find any documentation for _Array#first_')
     end
   end
 end

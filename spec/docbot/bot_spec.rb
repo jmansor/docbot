@@ -98,4 +98,51 @@ RSpec.describe Docbot::Bot do
       expect(bot_response).to eq('I\'m sorry, I could not find any documentation for _Array#first_')
     end
   end
+
+  describe '#respond_help' do
+    it 'should return a help text for the user to understand how to talk to the bot' do
+      bot_help = bot.respond_help
+
+      expect(bot_help).to eq("Hi human, if you need documentation about any Ruby Core/Stdlib class, module or method, you can ask me in this way:\nArray#first\n@docbot: Array#first\n@docbot: please explain Array#first")
+    end
+  end
+
+  describe '#needs_help?' do
+    context 'when the message mentions the bot with no further text' do
+      it 'should return true' do
+        message = "<@#{bot_id}>"
+        needs_help = bot.needs_help?(message, bot_id)
+
+        expect(needs_help).to be true
+
+        message = "<@#{bot_id}>:"
+        needs_help = bot.needs_help?(message, bot_id)
+
+        expect(needs_help).to be true
+      end
+    end
+
+    context 'when the message mentions the bot followed by the word "help"' do
+      it 'should return true' do
+        message = "<@#{bot_id}>: help"
+        needs_help = bot.needs_help?(message, bot_id)
+
+        expect(needs_help).to be true
+
+        message = "<@#{bot_id}>:help"
+        needs_help = bot.needs_help?(message, bot_id)
+
+        expect(needs_help).to be true
+      end
+    end
+
+    context 'when the message mentions the bot but doesn\t match any of the help patterns' do
+      it 'should return false' do
+        message = "<@#{bot_id}>: help me"
+        needs_help = bot.needs_help?(message, bot_id)
+
+        expect(needs_help).to be false
+      end
+    end
+  end
 end

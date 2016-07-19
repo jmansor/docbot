@@ -24,13 +24,18 @@ module Docbot
       @client.on :close do |_data|
         puts "Client is about to disconnect"
       end
-
       @client.on :closed do |_data|
         puts "Client has disconnected successfully!"
       end
+
       @client.on :message do |data|
         message = data.text
-        symbol_doc = self.read(message, @client.self.id)
+        bot_id = @client.self.id
+        if self.needs_help?(message, bot_id)
+          @client.message channel: data.channel, text: self.respond_help
+        end
+
+        symbol_doc = self.read(message, bot_id)
         if self.must_respond?(symbol_doc)
           if symbol_doc.success
             @client.message channel: data.channel, text: self.respond_ok(symbol_doc)
@@ -63,12 +68,37 @@ module Docbot
       !symbol_doc.nil?
     end
 
+    def needs_help?(message, bot_id)
+      needs_help = false
+      needs_help_patterns = [
+        /^<@#{bot_id}>$/,
+        /^<@#{bot_id}>:$/,
+        /^<@#{bot_id}>:\s*help$/
+      ]
+
+      needs_help_patterns.each do |pattern|
+        needs_help ||= !pattern.match(message).nil?
+      end
+
+      needs_help
+    end
+
     def respond_ok(symbol_doc)
       symbol_doc.text
     end
 
     def respond_error(symbol_doc)
       "I'm sorry, I could not find any documentation for _#{symbol_doc.symbol}_"
+    end
+
+    def respond_help
+      help = []
+      help << "Hi human, if you need documentation about any Ruby Core/Stdlib class, module or method, you can ask me in this way:"
+      MATCHERS.each do |matcher|
+        help << matcher.pattern
+      end
+
+      help.join("\n")
     end
   end
 end

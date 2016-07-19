@@ -1,0 +1,19 @@
+module Docbot
+  module Matchers
+    class BotMentionDirectMessage
+      def self.match(message, bot_id)
+        symbol_candidate = nil
+        splitted_message = message.split
+        if splitted_message.count == 2
+          bot_mention_candidate = splitted_message[0]
+          if bot_mention_candidate == "<@#{bot_id}>:"
+            symbol_candidate = splitted_message[1]
+          end
+        end
+puts symbol_candidate
+
+        symbol_candidate
+      end
+    end
+  end
+end

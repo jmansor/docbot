@@ -10,7 +10,6 @@ module Docbot
             symbol_candidate = splitted_message[1]
           end
         end
-puts symbol_candidate
 
         symbol_candidate
       end

@@ -9,6 +9,10 @@ module Docbot
 
         symbol
       end
+
+      def self.pattern
+        'Array#first'
+      end
     end
   end
 end

@@ -13,4 +13,12 @@ RSpec.describe Docbot::Matchers::BotMentionAdvancedMessage do
       end
     end
   end
+
+  describe '#pattern' do
+    it 'should return the pattern matched by the matcher' do
+      pattern = Docbot::Matchers::BotMentionAdvancedMessage.pattern
+
+      expect(pattern).to eq('@docbot: please explain Array#first')
+    end
+  end
 end

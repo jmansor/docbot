@@ -13,6 +13,10 @@ module Docbot
 
         symbol_candidate
       end
+
+      def self.pattern
+        '@docbot: Array#first'
+      end
     end
   end
 end

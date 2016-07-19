@@ -103,7 +103,14 @@ RSpec.describe Docbot::Bot do
     it 'should return a help text for the user to understand how to talk to the bot' do
       bot_help = bot.respond_help
 
-      expect(bot_help).to eq("Hi human, if you need documentation about any Ruby Core/Stdlib class, module or method, you can ask me in this way:\nArray#first\n@docbot: Array#first\n@docbot: please explain Array#first")
+      expect(bot_help).to eq("Hi human, if you need documentation about any Ruby Core/Stdlib class, module or method, you can ask me in this way:
+
+_Array#first_
+_@docbot: Array#first_
+_@docbot: please explain Array#first_
+
+I understand any of the following formats:
+_Class | Module | Module::Class | Class::method | Class#method | Class.method | method_")
     end
   end
 

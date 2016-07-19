@@ -33,15 +33,15 @@ module Docbot
         bot_id = @client.self.id
         if self.needs_help?(message, bot_id)
           @client.message channel: data.channel, text: self.respond_help
-        end
-
-        symbol_doc = self.read(message, bot_id)
-        if self.must_respond?(symbol_doc)
-          if symbol_doc.success
-            @client.message channel: data.channel, text: self.respond_ok(symbol_doc)
-          else
-            if message.split.count > 1
-              @client.message channel: data.channel, text: self.respond_error(symbol_doc)
+        else
+          symbol_doc = self.read(message, bot_id)
+          if self.must_respond?(symbol_doc)
+            if symbol_doc.success
+              @client.message channel: data.channel, text: self.respond_ok(symbol_doc)
+            else
+              if message.split.count > 1
+                @client.message channel: data.channel, text: self.respond_error(symbol_doc)
+              end
             end
           end
         end
@@ -94,9 +94,14 @@ module Docbot
     def respond_help
       help = []
       help << "Hi human, if you need documentation about any Ruby Core/Stdlib class, module or method, you can ask me in this way:"
+      help << ''
       MATCHERS.each do |matcher|
-        help << matcher.pattern
+        help << "_#{matcher.pattern}_"
       end
+
+      help << ''
+      help << 'I understand any of the following formats:'
+      help << '_Class | Module | Module::Class | Class::method | Class#method | Class.method | method_'
 
       help.join("\n")
     end

@@ -6,10 +6,30 @@ RSpec.describe Docbot::Matchers::BotMentionDirectMessage do
     context 'when the bot was mentioned followed immediately by a single word' do
       it 'should return the symbol candidate' do
         bot_id = '1'
-        message = "<@#{bot_id}>: Array#first"
 
+        message = "<@#{bot_id}>: Array#first"
         symbol = Docbot::Matchers::BotMentionDirectMessage.match(message, bot_id)
         expect(symbol).to eq('Array#first')
+
+        message = "<@#{bot_id}>:Array#first"
+        symbol = Docbot::Matchers::BotMentionDirectMessage.match(message, bot_id)
+        expect(symbol).to eq('Array#first')
+
+        message = "<@#{bot_id}>: Array"
+        symbol = Docbot::Matchers::BotMentionDirectMessage.match(message, bot_id)
+        expect(symbol).to eq('Array')
+
+        message = "<@#{bot_id}>: Array.first"
+        symbol = Docbot::Matchers::BotMentionDirectMessage.match(message, bot_id)
+        expect(symbol).to eq('Array.first')
+
+        message = "<@#{bot_id}>: ACL::ACLEntry"
+        symbol = Docbot::Matchers::BotMentionDirectMessage.match(message, bot_id)
+        expect(symbol).to eq('ACL::ACLEntry')
+
+        message = "<@#{bot_id}>: Array#first I need to know what id does"
+        symbol = Docbot::Matchers::BotMentionDirectMessage.match(message, bot_id)
+        expect(symbol).to be_nil
       end
     end
   end

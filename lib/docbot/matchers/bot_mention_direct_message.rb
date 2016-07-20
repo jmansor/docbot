@@ -3,12 +3,11 @@ module Docbot
     class BotMentionDirectMessage
       def self.match(message, bot_id)
         symbol_candidate = nil
-        splitted_message = message.split
-        if splitted_message.count == 2
-          bot_mention_candidate = splitted_message[0]
-          if bot_mention_candidate == "<@#{bot_id}>:"
-            symbol_candidate = splitted_message[1]
-          end
+
+        pattern = /^<@#{bot_id}>:{0,1}\s*(?<symbol>\S+)$/
+        matches = pattern.match(message)
+        if !matches.nil? && !matches[:symbol].nil?
+          symbol_candidate = matches[:symbol]
         end
 
         symbol_candidate

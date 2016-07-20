@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# script/server: Launch the application and any extra required processes
+#                locally.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+if [ -z $SLACK_API_TOKEN ]; then
+  echo "SLACK_API_TOKEN environment variable is missing."
+  echo "Try:"
+  echo "SLACK_API_TOKEN=<your-slack-bot-token> script/server"
+  exit
+fi
+bundle exec ruby bin/server
+
+# ensure everything in the app is up to date.
+# script/update

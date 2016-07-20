@@ -1,0 +1,3 @@
+require 'docbot/runner'
+
+Docbot::Runner.run

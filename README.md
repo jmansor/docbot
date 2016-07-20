@@ -68,3 +68,29 @@ To run the project tests, run:
 ```
 script/test
 ```
+
+## Have Docker?
+This project includes a Dockerfile to create a Docker image where you can setup
+the project to run.
+
+First create the image:
+```
+$ docker build -t docbot -f Dockerfile .
+```
+
+Then, create a container from the image:
+```
+$ docker run -it docbot /bin/bash
+```
+
+In the container terminal, clone the project and run the setup script
+```
+docker-container$ git clone https://github.com/jmansor/docbot.git
+docker-container$ cd docbot
+docker-container$ script/setup
+```
+
+All set, now start the Bot!
+```
+docker-container$ script/server
+```

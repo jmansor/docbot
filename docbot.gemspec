@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "docbot"
   spec.version       = Docbot::VERSION
   spec.authors       = ["Juan Mansor"]
-  spec.email         = ["juan@funne.ly"]
+  spec.email         = ["juanpablo.mansor@gmail.com"]
 
   spec.summary       = 'Slack Bot to query for Ruby Core/Stdlib documentation.'
   spec.homepage      = "https://github.com/jmansor/docbot.git"

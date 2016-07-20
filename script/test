@@ -1,0 +1,3 @@
+#!/bin/sh
+
+SLACK_API_TOKEN='1234567890' bundle exec rspec

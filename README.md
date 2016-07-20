@@ -1,36 +1,70 @@
 # Docbot
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/docbot`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Docbot is a Slack Bot that allows users to ask for Ruby Core/Stdlib documentation by talking to the Bot.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+First you will need to install all the bot dependencies:
 
-```ruby
-gem 'docbot'
+```bash
+script/setup
 ```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install docbot
 
 ## Usage
 
-TODO: Write usage instructions here
+To start the bot, run:
 
-## Development
+```bash
+SLACK_API_TOKEN=<your-slack-bot-token> script/server
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### How do I talk to the bot?
+There are three ways to ask the bot for Ruby documentation:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+#### Direct Message
+Send a message with just the class, module or method you want to know about
+```
+Array#first
+```
 
-## Contributing
+#### Bot Mention Direct Message
+Send a message with a mention to the Bot, followed by the class, module or method you want to know about.
+```
+@<your-bot-name>: Array#first
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/docbot.
+#### Bot Mention Advanced Message
+Send a message with a mention to the Bot, followed by 'please explain', followed by the class, module or method you want to know about.
+```
+@<your-bot-name>: please explain Array#first
+```
 
+### Don't want to have to remember all this?
+You can ask the Bot how to talk to him:
+```
+@<your-bot-name>
+```
+or
+```
+@<your-bot-name>: help
+```
+
+### What are the accepted formats to indicate the Ruby class, module or method I want to know about?
+
+```
+Class | Module | Module::Class | Class::method | Class#method | Class.method | method
+```
+
+#### Examples
+```
+@<your-bot-name>: please explain Array#first
+@<your-bot-name>: rand
+Array.first
+@<your-bot-name>: ACL::ACLEntry
+```
+## Test
+
+To run the project tests, run:
+```
+script/test
+```

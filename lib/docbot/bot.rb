@@ -5,7 +5,7 @@ require 'docbot/matchers/bot_mention_direct_message'
 require 'docbot/matchers/bot_mention_advanced_message'
 
 module Docbot
-  # Public: An object to create a Slack bot that can be requested for Ruby
+  # Internal: An object to create a Slack bot that can be requested for Ruby
   # documentation for Ruby Core/Stdlib classes, modules and methods.
   class Bot
     # Public: Array with the matchers that will be applied by this Bot.

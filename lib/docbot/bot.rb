@@ -96,7 +96,7 @@ module Docbot
       help << "Hi human, if you need documentation about any Ruby Core/Stdlib class, module or method, you can ask me in this way:"
       help << ''
       MATCHERS.each do |matcher|
-        help << "_#{matcher.pattern}_"
+        help << "_#{matcher.pattern_example}_"
       end
 
       help << ''

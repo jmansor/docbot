@@ -34,6 +34,15 @@ RSpec.describe Docbot::Matchers::BotMentionDirectMessage do
     end
   end
 
+  describe '#pattern' do
+    it 'should return the message pattern matched by the matcher' do
+      bot_id = '1'
+      pattern = Docbot::Matchers::BotMentionDirectMessage.pattern(bot_id)
+
+      expect(pattern).to eq(/\A<@#{bot_id}>:{0,1}\s*(?<symbol>\S+)$/)
+    end
+  end
+
   describe '#pattern_example' do
     it 'should return a pattern example matched by the matcher' do
       bot_name = 'rubydocbot'

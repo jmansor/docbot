@@ -10,13 +10,19 @@ RSpec.describe Docbot::Bot do
     'rubydocbot'
   end
 
+  let (:client) do
+    double
+  end
+  let (:client_self) do
+    double
+  end
+  let (:ruby_doc) do
+    double
+  end
+
   let (:bot) do
-    client = double
-    client_self = double
     allow(client_self).to receive(:name).and_return(bot_name)
     allow(client).to receive(:self).and_return(client_self)
-
-    ruby_doc = double
     allow(ruby_doc).to receive(:fetch_symbol_doc).and_return('Array#first')
 
     Docbot::Bot.new(client, ruby_doc)
@@ -162,6 +168,15 @@ _Class | Module | Module::Class | Class::method | Class#method | Class.method | 
 
         expect(needs_help).to be false
       end
+    end
+  end
+
+  describe '#start' do
+    it 'should bind the Slack RTM client events and start the client' do
+      expect(client).to receive(:on).exactly(4).times
+      expect(client).to receive(:start!).exactly(1).times
+
+      bot.start
     end
   end
 end

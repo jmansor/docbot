@@ -36,16 +36,14 @@ RSpec.describe Docbot::Matchers::DirectMessage do
         expect(symbol).to be_nil
       end
     end
+  end
 
-    context 'when the slack message has more than one word' do
-      it 'should return nil' do
-        message = 'Word1 Word2'
-        bot_id = '1'
+  describe '#pattern' do
+    it 'should return the message pattern matched by the matcher' do
+      bot_id = '1'
+      pattern = Docbot::Matchers::DirectMessage.pattern(bot_id)
 
-        symbol = Docbot::Matchers::DirectMessage.match(message, bot_id)
-
-        expect(symbol).to be_nil
-      end
+      expect(pattern).to eq(/\A(?<symbol>\S+)$/)
     end
   end
 

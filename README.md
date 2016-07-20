@@ -10,6 +10,9 @@ First you will need to install all the bot dependencies:
 script/setup
 ```
 
+### Dependencies
+This project depends on [slack-ruby-client](https://github.com/dblock/slack-ruby-client), a gem that handles the connection to the Slack RTM API and provides a set of mechanisms to bind the Slack and respond to them.
+
 ## Usage
 
 To start the bot, run:
@@ -80,7 +83,7 @@ $ docker build -t docbot -f Dockerfile .
 
 Then, create a container from the image:
 ```
-$ docker run -it docbot /bin/bash
+$ docker run -it docbot bash --login
 ```
 
 In the container terminal, clone the project and run the setup script

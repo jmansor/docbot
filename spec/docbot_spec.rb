@@ -1,11 +1,14 @@
 require 'spec_helper'
+require 'docbot'
 
-describe Docbot do
-  it 'has a version number' do
-    expect(Docbot::VERSION).not_to be nil
-  end
+RSpec.describe Docbot do
+  describe '#start' do
+    it 'should instance the bot and start it' do
+      bot = instance_double('Docbot::Bot')
+      expect(bot).to receive(:start)
+      expect(Docbot::Bot).to receive(:new).and_return(bot)
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+      Docbot.start
+    end
   end
 end

@@ -6,8 +6,20 @@ require 'docbot/matchers/bot_mention_direct_message'
 require 'docbot/matchers/bot_mention_advanced_message'
 
 RSpec.describe Docbot::Bot do
+  let (:bot_name) do
+    'rubydocbot'
+  end
+
   let (:bot) do
-    Docbot::Bot.new
+    client = double
+    client_self = double
+    allow(client_self).to receive(:name).and_return(bot_name)
+    allow(client).to receive(:self).and_return(client_self)
+
+    ruby_doc = double
+    allow(ruby_doc).to receive(:fetch_symbol_doc).and_return('Array#first')
+
+    Docbot::Bot.new(client, ruby_doc)
   end
 
   let (:bot_id) do
@@ -106,8 +118,8 @@ RSpec.describe Docbot::Bot do
       expect(bot_help).to eq("Hi human, if you need documentation about any Ruby Core/Stdlib class, module or method, you can ask me in this way:
 
 _Array#first_
-_@docbot: Array#first_
-_@docbot: please explain Array#first_
+_@#{bot_name}: Array#first_
+_@#{bot_name}: please explain Array#first_
 
 I understand any of the following formats:
 _Class | Module | Module::Class | Class::method | Class#method | Class.method | method_")

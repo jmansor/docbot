@@ -7,8 +7,8 @@ module Docbot
         /^<@#{bot_id}>:{0,1}\s*(?<symbol>\S+)$/
       end
 
-      def self.pattern_example
-        '@docbot: Array#first'
+      def self.pattern_example(bot_name)
+        "@#{bot_name}: Array#first"
       end
     end
   end

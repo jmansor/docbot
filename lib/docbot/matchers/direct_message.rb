@@ -7,7 +7,7 @@ module Docbot
         /^(?<symbol>\S+)$/
       end
 
-      def self.pattern_example
+      def self.pattern_example(bot_name)
         'Array#first'
       end
     end

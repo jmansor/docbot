@@ -51,7 +51,8 @@ RSpec.describe Docbot::Matchers::DirectMessage do
 
   describe '#pattern_example' do
     it 'should return a pattern example matched by the matcher' do
-      pattern = Docbot::Matchers::DirectMessage.pattern_example
+      bot_name = 'rubydocname'
+      pattern = Docbot::Matchers::DirectMessage.pattern_example(bot_name)
 
       expect(pattern).to eq('Array#first')
     end

@@ -12,9 +12,9 @@ module Docbot
       Docbot::Matchers::BotMentionAdvancedMessage
     ]
 
-    def initialize
-      @client = Slack::RealTime::Client.new
-      @ruby_doc = Docbot::RubyDoc.new
+    def initialize(client, ruby_doc)
+      @client = client
+      @ruby_doc = ruby_doc
     end
 
     def start
@@ -96,7 +96,7 @@ module Docbot
       help << "Hi human, if you need documentation about any Ruby Core/Stdlib class, module or method, you can ask me in this way:"
       help << ''
       MATCHERS.each do |matcher|
-        help << "_#{matcher.pattern_example}_"
+        help << "_#{matcher.pattern_example(@client.self.name)}_"
       end
 
       help << ''

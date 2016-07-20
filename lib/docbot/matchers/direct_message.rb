@@ -4,7 +4,7 @@ module Docbot
   module Matchers
     class DirectMessage < Docbot::Matcher
       def self.pattern(bot_id)
-        /^(?<symbol>\S+)$/
+        /\A(?<symbol>\S+)$/
       end
 
       def self.pattern_example(bot_name)

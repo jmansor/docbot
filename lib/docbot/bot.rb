@@ -71,9 +71,9 @@ module Docbot
     def needs_help?(message, bot_id)
       needs_help = false
       needs_help_patterns = [
-        /^<@#{bot_id}>$/,
-        /^<@#{bot_id}>:$/,
-        /^<@#{bot_id}>:\s*help$/
+        /\A<@#{bot_id}>$/,
+        /\A<@#{bot_id}>:$/,
+        /\A<@#{bot_id}>:\s*help$/
       ]
 
       needs_help_patterns.each do |pattern|

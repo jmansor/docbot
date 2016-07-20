@@ -4,7 +4,12 @@ require 'docbot/ruby_doc'
 require 'docbot/bot'
 require 'docbot/config'
 
+# Public: A Slack Bot to allow Slack users to query for Ruby Core/Stdlib
+# documentation
 module Docbot
+  # Public: start Slack Bot server
+  #
+  # Returns Nothing.
   def self.start
     slack_rtm_client = Slack::RealTime::Client.new
     ruby_doc = Docbot::RubyDoc.new

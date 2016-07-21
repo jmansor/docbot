@@ -90,5 +90,6 @@ In the container terminal, clone the project and run the setup script
 ```
 docker-container$ git clone https://github.com/jmansor/docbot.git
 docker-container$ cd docbot
+docker-container$ script/setup
 docker-container$ SLACK_API_TOKEN=<your-slack-bot-token> script/server
 ```
